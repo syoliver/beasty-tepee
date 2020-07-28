@@ -1,0 +1,30 @@
+From 9a6672bd13d5d60c9cf2cb897361271d81ede42d Mon Sep 17 00:00:00 2001
+From: syoliver <50275847+syoliver@users.noreply.github.com>
+Date: Tue, 28 Jul 2020 21:52:00 +0200
+Subject: [PATCH] Fix conan
+
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5b53f31..c84ce0d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -104,11 +104,11 @@ else()
+     find_package(Boost REQUIRED COMPONENTS system)
+     target_link_libraries(boost_url
+         PUBLIC
+-            Boost::system
++            ${Boost_LIBRARIES}
+     )
+ endif()
+ 
+-if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR AND NOT BOOST_URL_IN_BOOST_TREE)
++if(NOT BOOST_URL_IN_BOOST_TREE)
+     set_target_properties(boost_url PROPERTIES EXPORT_NAME url)
+     install(TARGETS boost_url EXPORT boost_url_targets)
+ 
+-- 
+2.13.0.windows.1
+

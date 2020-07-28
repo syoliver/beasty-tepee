@@ -14,7 +14,6 @@ set(
   include/public/beasty-tepee/response.hpp
   include/public/beasty-tepee/request_header_handler.hpp
   include/public/beasty-tepee/request_body_handler.hpp
-  include/public/beasty-tepee/fields_alloc.hpp
 )
 set(
   private_headers
@@ -22,6 +21,7 @@ set(
   include/private/stream_request.hpp
   include/private/worker.hpp
   include/private/server_impl.hpp
+  include/private/fields_alloc.hpp
 )
 
 add_library(
