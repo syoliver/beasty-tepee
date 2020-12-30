@@ -1,6 +1,6 @@
 [requires]
-boost/1.73.0
-boost.url/20200728
+boost/1.75.0
+boost.url/20200521
 
 [generators]
 cmake

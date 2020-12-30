@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/beast/core/error.hpp>
+#include <boost/beast/http/error.hpp>
 #include <boost/beast/http/verb.hpp>
 #include <algorithm>
 #include <deque>

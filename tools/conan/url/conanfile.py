@@ -48,7 +48,7 @@ class BoostUrl(ConanFile):
     def source(self):
         tools.get(**self.conan_data["sources"][self.version])
         extracted_dir = "url-{commit}".format(
-          commit = os.path.splitext(os.path.basename(self.conan_data["sources"][self.version]["url"]))[0],
+          commit = ".".join(os.path.basename(self.conan_data["sources"][self.version]["url"]).split(".")[:-2]),
         )
         os.rename(extracted_dir, self._source_subfolder)
 
@@ -58,7 +58,8 @@ class BoostUrl(ConanFile):
 
         self._cmake.definitions["BOOST_URL_BUILD_TESTS"] = False
         self._cmake.definitions["BOOST_URL_BUILD_EXAMPLES"] = False
-
+        #self._cmake.definitions["BOOST_SUPERPROJECT_VERSION"] = 1
+        self._cmake.definitions["CMAKE_TOOLCHAIN_FILE"]=os.path.join(self._source_subfolder, "cmake", "toolchains", "gcc.cmake")
         self._cmake.configure(build_folder=self._build_subfolder)
         return self._cmake
 
@@ -69,7 +70,7 @@ class BoostUrl(ConanFile):
         cmake.build()
 
     def requirements(self):
-        self.requires("boost/1.73.0")
+        self.requires("boost/1.75.0")
 
 
     def package(self):

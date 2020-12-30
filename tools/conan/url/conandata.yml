@@ -1,8 +1,8 @@
 sources:
-  "20200728":
-    url: https://github.com/CPPAlliance/url/archive/a56ae0df6d3078319755fbaa67822b4fa7fd352b.zip
-    sha256:  668b305ef22e21748da35548360cfa2a531d3905c2f03418c8ed76c97ef4da5c
+  "20200521": 
+    url: https://github.com/CPPAlliance/url/archive/alpha.tar.gz
+    sha256: 9952d42e9706e40e5b8a3a646ddc78fb655d2b29b86037970f7978cc80693677
 patches:
-  "20200728":
+  "20200521":
     - patch_file: "patches/0001-Fix-conan.patch"
       base_path: "source_subfolder"
