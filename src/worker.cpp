@@ -69,8 +69,12 @@ namespace tepee::server
       return;
 
     tepee::server::header header_request(parser.get().method(), parser.get().target());
-    auto&                 request_aggregator = handler_->parse_header(header_request);
-    request_aggregator.parse_request_body(shared_from_this(), parser);
+    auto                  opt_request_aggregator = handler_->parse_header(header_request);
+    if(opt_request_aggregator.has_value())
+    {
+      auto& request_aggregator = opt_request_aggregator->get(); 
+      request_aggregator.parse_request_body(shared_from_this(), parser);
+    }
   }
 
   void worker::send_response(const tepee::server::response& response)

@@ -9,6 +9,7 @@
 #include <boost/beast/core/span.hpp>
 #include <memory>
 #include <functional>
+#include <optional>
 
 
 namespace tepee::server
@@ -18,7 +19,8 @@ namespace tepee::server
   class request_header_handler
   {
  public:
-    virtual tepee::server::request_body_handler& parse_header(const tepee::server::header& header_request) = 0;
+    using opt_request_body_handler_ref = std::optional<std::reference_wrapper<tepee::server::request_body_handler>>;
+    virtual opt_request_body_handler_ref parse_header(const tepee::server::header& header_request) = 0;
   };
 
 class test_header_handler : public tepee::server::request_header_handler
@@ -29,15 +31,13 @@ class test_header_handler : public tepee::server::request_header_handler
   {
   }
 
-  virtual tepee::server::request_body_handler& parse_header(const tepee::server::header& header_request) override
+  virtual opt_request_body_handler_ref parse_header(const tepee::server::header& header_request) override
   {
-    if(header_request.method() == boost::beast::http::verb::post)
+    if(header_request.method() == boost::beast::http::verb::get)
     {
       return stream_body_parser_;
     }
-    else
-    {
-    }
+    return std::nullopt;
   }
 
   stream_request_body_handler stream_body_parser_;

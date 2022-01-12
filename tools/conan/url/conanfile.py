@@ -70,7 +70,7 @@ class BoostUrl(ConanFile):
         cmake.build()
 
     def requirements(self):
-        self.requires("boost/1.75.0")
+        self.requires("boost/1.78.0")
 
 
     def package(self):

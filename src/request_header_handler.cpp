@@ -47,8 +47,9 @@ namespace tepee::server
       });
 
       boost::beast::error_code ec;
-      while(!parser_impl.is_done() && !handle_request_done)
+      do
       {
+
         read_buffer_from_worker(*worker, boost::beast::span(buf.data(), buf.size()), parser_impl, ec);
 
         writer(std::make_tuple(buf.data(), buf.size() - parser_impl.get().body().size, ec));
@@ -57,7 +58,8 @@ namespace tepee::server
         {
           return;
         }
-      }
+      } while(!parser_impl.is_done() && !handle_request_done);
+
     });
   }
 } // namespace tepee::server
