@@ -85,7 +85,8 @@ namespace tepee::server
     string_response_->keep_alive(false);
     string_response_->set(boost::beast::http::field::server, "Beast");
     string_response_->set(boost::beast::http::field::content_type, "text/plain");
-    // string_response_->body() = error;
+    string_response_->body() = response.body();
+
     string_response_->prepare_payload();
 
     string_serializer_.emplace(*string_response_);
